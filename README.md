@@ -101,15 +101,16 @@ INSERT INTO transaction (sender_user_id, receiver_user_id, amount, currency_id, 
 (4, 10, 2200.00, 1, '2026-03-07 20:00:00');   -- Erick -> Mauricio (CLP)
 ```
 > **Visualización de datos insertados:**
+---
 > ![Inserción de datos](img/insertTables.png)
 
 Currency
 > ![currency](img/selectCurrency.png)
 
-Currency
+app_user
 > ![app_user](img/selectApp_user.png)
 
-Currency
+transaction
 > ![transaction](img/selectTransaction.png)
 
 ---
@@ -128,7 +129,7 @@ where u.user_id = 1
 order by  c.currency_name;
 ```
 > **Resultado :**
-> ![Moneda elegida](img/URL_IMAGEN_VISTA)
+> ![Moneda elegida](img/currencyUser.png)
 
 4.2  Todas las transacciones registradas. 
 ```sql
@@ -149,7 +150,7 @@ on c.currency_id = t.currency_id
 order by t.transaction_id;
 ```
 > **Resultado :**
-> ![Transacciones realizadas](img/URL_IMAGEN_VISTA)
+> ![Transacciones realizadas](img/totalTrans.png)
 
 4.3  Transacciones realizadas por un usuario específico
 ```sql
@@ -171,7 +172,7 @@ where u_sender.user_id = 1
 order by t.transaction_date desc;
 ```
 > **Resultado :**
-> ![Transacciones realizadas por Francisco](img/URL_IMAGEN_VISTA)
+> ![Transacciones realizadas por Francisco](img/totalUsuario.png)
 
 4.4 Modificar el campo correo electrónico de un usuario específico 
 ```sql
@@ -191,6 +192,7 @@ where transaction_id = 1;
 > **Resultado :**
 > ![Eliminar transacción](img/deleteTrans.png)
 
+
 4.6 Practicar sub‑consultas para obtener el total de transacciones por usuario  
 ```sql
 select count(*) as "Total_transacciones_por_usuario"
@@ -199,7 +201,9 @@ where sender_user_id in (select user_id from app_user where user_id = 1)
 or receiver_user_id in (select user_id from app_user where user_id = 1);
 ```
 > **Resultado :**
+---
 > ![Total de transacciones por usuario](img/subTotalTrans.png)
+
 
 4.7 Vista que muestre el top‑5 de usuarios con mayor saldo.
 ```sql
@@ -212,6 +216,7 @@ limit 5;
 select * from v_top_five_user_balance;
 ```
 > **Resultado :**
+---
 > ![Vista de top 5 usuarios por saldo](img/selectTop5.png)
 
 ---
@@ -228,6 +233,7 @@ start TRANSACTION;
 COMMIT;
 ```
 > **Saldos después de la transferencia:**
+---
 > ![Transacción exitosa](img/balance.png)
 
 
@@ -244,8 +250,10 @@ start TRANSACTION;
 ROLLBACK;
 ```
 > **Mensaje de error del motor:**
+---
 > ![Error de Integridad](img/errorIntegridad.png)
 > **Estado tras Rollback:**
+---
 > ![Rollback exitoso](img/rollback.png)
 
 ---
